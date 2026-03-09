@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music – Scratch Cat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-header { background: var(--deep); }
+    #music-main { background: var(--black); }
+    .track-list { margin-top:4rem; }
+    .track-row { display:grid; grid-template-columns:60px 1fr auto; align-items:center; gap:2rem; padding:2rem 0; border-bottom:1px solid rgba(123,47,255,.12); position:relative; overflow:hidden; transition:padding-left .3s; }
+    .track-row::before { content:''; position:absolute; left:0; top:0; bottom:0; width:0; background:rgba(123,47,255,.06); transition:width .4s; }
+    .track-row:hover { padding-left:1rem; }
+    .track-row:hover::before { width:100%; }
+    .track-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:rgba(123,47,255,.2); line-height:1; position:relative; z-index:1; }
+    .track-details { position:relative; z-index:1; }
+    .track-name { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:.03em; line-height:1; margin-bottom:.4rem; }
+    .track-meta { display:flex; gap:1.5rem; flex-wrap:wrap; }
+    .track-meta span { font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:.15em; color:var(--grey); text-transform:uppercase; }
+    .track-meta span strong { color:var(--purple); }
+    .track-actions { display:flex; gap:.8rem; flex-wrap:wrap; position:relative; z-index:1; }
+    .track-play-btn { display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--white); background:var(--purple); padding:.55rem 1.2rem; border-radius:2px; transition:all .25s; }
+    .track-play-btn:hover { background:var(--purple-mid); transform:translateY(-2px); box-shadow:0 6px 20px rgba(123,47,255,.4); }
+    .track-spotify-embed { margin-top:1.5rem; }
+    .track-spotify-embed iframe { border-radius:4px; border:1px solid rgba(123,47,255,.2); }
+
+    /* SPOTIFY SECTION */
+    #spotify-section { background:var(--deep); }
+    .spotify-profile-block { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .spotify-text h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4.5rem); line-height:.95; background:linear-gradient(135deg,var(--white),var(--purple-glow)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1.5rem; }
+    .spotify-text p { font-size:1.05rem; color:#c0b0d0; line-height:1.8; margin-bottom:2rem; }
+    .spotify-embeds { display:flex; flex-direction:column; gap:1rem; }
+    .spotify-embeds iframe { border-radius:4px; }
+
+    @media(max-width:1024px) { .spotify-profile-block{grid-template-columns:1fr;} .track-row{grid-template-columns:50px 1fr;} .track-actions{display:none;} }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav id="navbar">
+  <a class="nav-logo" href="index.html"><img src="images/logo-cat.png" alt="Scratch Cat" /><span>Scratch Cat</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html" class="active">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="container">
+    <p class="section-label">Discography</p>
+    <h1>MUSIC</h1>
+  </div>
+  <div class="page-header-line"></div>
+</div>
+
+<section id="music-main">
+  <div class="container">
+    <p class="section-label reveal">Singles</p>
+    <h2 class="section-title reveal">ALL RELEASES</h2>
+    <div class="track-list">
+
+      <div class="track-row reveal">
+        <div class="track-num">01</div>
+        <div class="track-details">
+          <div class="track-name">Ghosts (That Can&apos;t Die)</div>
+          <div class="track-meta"><span>Single</span><span><strong>2024</strong></span><span>Alt Rock</span></div>
+          <div class="track-spotify-embed">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0PJ6B8GrizqPLl76wGNDnk?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="track-actions">
+          <a class="track-play-btn" href="https://open.spotify.com/track/0PJ6B8GrizqPLl76wGNDnk" target="_blank" rel="noopener">&#9654; Spotify</a>
+        </div>
+      </div>
+
+      <div class="track-row reveal">
+        <div class="track-num">02</div>
+        <div class="track-details">
+          <div class="track-name">Jaded</div>
+          <div class="track-meta"><span>Single</span><span><strong>2024</strong></span><span>Alt Rock</span></div>
+          <div class="track-spotify-embed">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/44UTYOBfDHi0gPGrruz5Yu?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="track-actions">
+          <a class="track-play-btn" href="https://open.spotify.com/track/44UTYOBfDHi0gPGrruz5Yu" target="_blank" rel="noopener">&#9654; Spotify</a>
+        </div>
+      </div>
+
+      <div class="track-row reveal">
+        <div class="track-num">03</div>
+        <div class="track-details">
+          <div class="track-name">Fall and Break</div>
+          <div class="track-meta"><span>Single</span><span><strong>2024</strong></span><span>Alt Rock</span></div>
+          <div class="track-spotify-embed">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/61TvxmlBn7Xaog17FldiK0?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="track-actions">
+          <a class="track-play-btn" href="https://open.spotify.com/track/61TvxmlBn7Xaog17FldiK0" target="_blank" rel="noopener">&#9654; Spotify</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="spotify-section">
+  <div class="container">
+    <div class="spotify-profile-block">
+      <div class="spotify-text reveal">
+        <p class="section-label">Streaming</p>
+        <h2>FIND US ON<br>SPOTIFY</h2>
+        <p>Follow Scratch Cat on Spotify and never miss a new release. Our catalogue is growing — get notified the second something new drops.</p>
+        <a class="btn btn-primary" href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Follow on Spotify
+        </a>
+      </div>
+      <div class="spotify-embeds reveal">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/5sC3QbNn932EM4ci7MjC9P?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="images/logo-cat.png" alt="Scratch Cat" /><p>Alt rock from North London. Loud, raw, and relentless since 2024.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Socials</h4><ul><li><a href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">Spotify</a></li><li><a href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://www.youtube.com/@standx23" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal"><p><strong>&copy; 2024&ndash;2025 Scratch Cat.</strong> All rights reserved. All music is the intellectual property of Scratch Cat. Unauthorised use is strictly prohibited. Built by <strong>Truwty</strong>.</p></div>
+      <div class="footer-made"><p>Built by <a href="#">Truwty</a></p></div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

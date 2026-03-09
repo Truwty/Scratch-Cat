@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shows – Scratch Cat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-header { background:var(--deep); }
+    #shows-main { background:var(--black); }
+    .shows-intro { font-size:1.15rem; color:#c0b0d0; line-height:1.8; max-width:600px; margin:2rem 0 4rem; }
+    .shows-section-title { font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.3em; color:var(--purple); text-transform:uppercase; margin-bottom:1.5rem; padding-bottom:.8rem; border-bottom:1px solid rgba(123,47,255,.2); }
+    .show-card { display:grid; grid-template-columns:90px 1fr auto; align-items:center; gap:2.5rem; padding:2rem 2rem; background:rgba(61,15,122,.04); border:1px solid rgba(123,47,255,.12); margin-bottom:.8rem; transition:all .3s; position:relative; overflow:hidden; }
+    .show-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--purple); transform:scaleY(0); transition:transform .3s; }
+    .show-card:hover { border-color:rgba(123,47,255,.4); background:rgba(123,47,255,.06); }
+    .show-card:hover::before { transform:scaleY(1); }
+    .show-card.past { opacity:.45; }
+    .sc-date { text-align:center; }
+    .sc-day { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--purple); line-height:1; }
+    .sc-mon { font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:.1em; color:var(--purple-glow); display:block; }
+    .sc-year { font-family:'Space Mono',monospace; font-size:.58rem; color:var(--grey); display:block; }
+    .sc-info {}
+    .sc-venue { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.04em; line-height:1.1; }
+    .sc-city { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--grey); margin-top:.3rem; }
+    .sc-tag { display:inline-block; font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.12em; color:var(--purple); border:1px solid var(--purple-dark); padding:.18rem .5rem; margin-top:.5rem; text-transform:uppercase; }
+    .sc-ticket { display:inline-flex; align-items:center; gap:.4rem; font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-decoration:none; color:var(--white); background:var(--purple); padding:.6rem 1.3rem; border-radius:2px; transition:all .25s; white-space:nowrap; }
+    .sc-ticket:hover { background:var(--purple-mid); transform:translateY(-2px); box-shadow:0 6px 20px rgba(123,47,255,.4); }
+    .sc-past-label { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--grey); border:1px solid rgba(123,47,255,.15); padding:.4rem .8rem; white-space:nowrap; }
+    .no-shows-block { text-align:center; padding:4rem 2rem; border:1px dashed rgba(123,47,255,.2); }
+    .no-shows-block p { font-family:'Space Mono',monospace; font-size:.8rem; color:var(--grey); line-height:2; }
+    .no-shows-block .big { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:rgba(123,47,255,.2); display:block; }
+
+    /* INSTAGRAM CTA */
+    #shows-follow { background:var(--deep); }
+    .follow-block { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .follow-text h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4.5rem); line-height:.95; background:linear-gradient(135deg,var(--white),var(--purple-glow)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1.5rem; }
+    .follow-text p { font-size:1.05rem; color:#c0b0d0; line-height:1.8; margin-bottom:2rem; }
+    .follow-img { position:relative; }
+    .follow-img img { width:100%; object-fit:cover; border:2px solid rgba(123,47,255,.25); box-shadow:0 0 60px rgba(123,47,255,.2); }
+
+    @media(max-width:1024px) { .follow-block{grid-template-columns:1fr;} }
+    @media(max-width:768px) { .show-card{grid-template-columns:70px 1fr;} .sc-ticket,.sc-past-label{display:none;} }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav id="navbar">
+  <a class="nav-logo" href="index.html"><img src="images/logo-cat.png" alt="Scratch Cat" /><span>Scratch Cat</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html" class="active">Shows</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:.8rem;align-items:center;">
+    <button class="nav-admin-btn" onclick="openAdminLogin()">&#9881; Admin</button>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="container">
+    <p class="section-label">Live</p>
+    <h1>SHOWS</h1>
+  </div>
+  <div class="page-header-line"></div>
+</div>
+
+<section id="shows-main">
+  <div class="container">
+    <p class="shows-intro reveal">Scratch Cat are best experienced live. Raw energy, no barriers, no bullshit. Catch them at a venue near you.</p>
+
+    <p class="shows-section-title">Upcoming Shows</p>
+    <div id="dynamicShows"></div>
+    <div id="noShows" class="no-shows-block reveal">
+      <span class="big">&#9836;</span>
+      <p>No upcoming shows announced yet.<br />Follow our socials so you don&apos;t miss the next one.</p>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-outline" href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+
+    <p class="shows-section-title" style="margin-top:5rem;">Past Shows</p>
+    <div class="show-card past reveal">
+      <div class="sc-date"><span class="sc-day">27</span><span class="sc-mon">FEB</span><span class="sc-year">2025</span></div>
+      <div class="sc-info">
+        <p class="sc-venue">Jom Junior Open Mic</p>
+        <p class="sc-city">London</p>
+        <span class="sc-tag">Past Show</span>
+      </div>
+      <a class="sc-ticket" href="https://www.instagram.com/p/DVRObzbCDsI/" target="_blank" rel="noopener">View Post &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<section id="shows-follow">
+  <div class="container">
+    <div class="follow-block">
+      <div class="follow-text reveal">
+        <p class="section-label">Stay Updated</p>
+        <h2>DON&apos;T MISS<br>THE NEXT ONE</h2>
+        <p>New shows are announced first on Instagram and TikTok. Follow us and you&apos;ll know the second we drop a date.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a class="btn btn-primary" href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram &#8599;</a>
+          <a class="btn btn-outline" href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok &#8599;</a>
+        </div>
+      </div>
+      <div class="follow-img reveal"><img src="images/band-8.png" alt="Scratch Cat live" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="adminLoginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAdminLogin()">&#215;</button>
+    <h2>ADMIN ACCESS</h2>
+    <p>Enter the admin password to manage shows.</p>
+    <div class="form-group"><label>Password</label><input type="password" id="adminPassword" onkeydown="if(event.key==='Enter')checkAdminPassword()" /></div>
+    <p class="form-error" id="adminError">Incorrect password.</p>
+    <button class="btn-admin" onclick="checkAdminPassword()">UNLOCK</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL (shows only on this page) -->
+<div id="admin-panel">
+  <div class="container">
+    <p class="section-label">Admin</p>
+    <h2 class="section-title">MANAGE SHOWS</h2>
+    <div class="admin-grid">
+      <div class="admin-section">
+        <h3>Add Show</h3>
+        <div class="form-group"><label>Date</label><input type="date" id="showDate" /></div>
+        <div class="form-group"><label>Venue</label><input type="text" id="showVenue" placeholder="Venue name" /></div>
+        <div class="form-group"><label>City</label><input type="text" id="showCity" placeholder="City" /></div>
+        <div class="form-group"><label>Ticket Link (optional)</label><input type="url" id="showLink" placeholder="https://..." /></div>
+        <button class="btn-admin" onclick="addShow()">+ ADD SHOW</button>
+      </div>
+      <div class="admin-section">
+        <h3>Current Shows</h3>
+        <ul class="admin-list" id="adminShowList"></ul>
+        <h3 style="margin-top:2rem;">Change Password</h3>
+        <div class="form-group"><label>New Password</label><input type="password" id="newPassword" /></div>
+        <div class="form-group"><label>Confirm</label><input type="password" id="confirmPassword" /></div>
+        <p class="form-error" id="pwError">Passwords don&apos;t match.</p>
+        <button class="btn-admin" onclick="changePassword()">UPDATE PASSWORD</button>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:2rem;">
+      <button class="btn-admin btn-danger" style="width:auto;" onclick="logoutAdmin()">LOGOUT</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="images/logo-cat.png" alt="Scratch Cat" /><p>Alt rock from North London. Loud, raw, and relentless since 2024.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Socials</h4><ul><li><a href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">Spotify</a></li><li><a href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://www.youtube.com/@standx23" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal"><p><strong>&copy; 2024&ndash;2025 Scratch Cat.</strong> All rights reserved. Built by <strong>Truwty</strong>.</p></div>
+      <div class="footer-made"><p>Built by <a href="#">Truwty</a></p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// Override renderShows for this page to use show-card style
+function renderShows() {
+  const shows = getShows();
+  const container = document.getElementById('dynamicShows');
+  const noShows = document.getElementById('noShows');
+  if (!container) return;
+  const upcoming = shows.filter(s => new Date(s.date) >= new Date()).sort((a,b) => new Date(a.date)-new Date(b.date));
+  if (noShows) noShows.style.display = upcoming.length === 0 ? 'block' : 'none';
+  container.innerHTML = upcoming.map(s => {
+    const d = new Date(s.date);
+    const day = d.toLocaleDateString('en-GB',{day:'2-digit'});
+    const mon = d.toLocaleDateString('en-GB',{month:'short'}).toUpperCase();
+    const year = d.getFullYear();
+    return `<div class="show-card">
+      <div class="sc-date"><span class="sc-day">${day}</span><span class="sc-mon">${mon}</span><span class="sc-year">${year}</span></div>
+      <div class="sc-info"><p class="sc-venue">${s.venue}</p><p class="sc-city">${s.city||''}</p><span class="sc-tag">Upcoming</span></div>
+      ${s.link?`<a class="sc-ticket" href="${s.link}" target="_blank" rel="noopener">Tickets &#8599;</a>`:'<span class="sc-past-label">Free Entry</span>'}
+    </div>`;
+  }).join('');
+}
+renderShows();
+</script>
+</body>
+</html>

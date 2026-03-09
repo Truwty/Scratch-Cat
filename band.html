@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Band – Scratch Cat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-header { background: var(--deep); }
+    .members-full { display:grid; gap:0; }
+    .member-full { display:grid; grid-template-columns:1fr 1fr; min-height:85vh; }
+    .member-full:nth-child(even) { direction:rtl; }
+    .member-full:nth-child(even) > * { direction:ltr; }
+    .member-photo-full { position:relative; overflow:hidden; }
+    .member-photo-full img { width:100%; height:100%; object-fit:cover; filter:grayscale(20%); transition:filter .5s, transform .5s; min-height:600px; }
+    .member-photo-full:hover img { filter:grayscale(0%); transform:scale(1.03); }
+    .member-photo-full::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent 60%,rgba(6,4,8,.6) 100%); pointer-events:none; }
+    .member-full:nth-child(even) .member-photo-full::after { background:linear-gradient(270deg,transparent 60%,rgba(6,4,8,.6) 100%); }
+    .member-info { display:flex; flex-direction:column; justify-content:center; padding:5rem 4rem; background:var(--deep); position:relative; overflow:hidden; }
+    .member-info::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:radial-gradient(circle,rgba(123,47,255,.1) 0%,transparent 70%); }
+    .member-number { font-family:'Bebas Neue',sans-serif; font-size:8rem; color:rgba(123,47,255,.08); line-height:1; position:absolute; top:2rem; right:3rem; }
+    .member-role-tag { font-family:'Space Mono',monospace; font-size:.7rem; letter-spacing:.3em; color:var(--purple); text-transform:uppercase; margin-bottom:1rem; display:inline-block; border:1px solid var(--purple-dark); padding:.3rem .8rem; }
+    .member-name-big { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,5vw,5rem); line-height:.95; letter-spacing:.02em; margin-bottom:1.5rem; background:linear-gradient(135deg,var(--white) 0%,var(--purple-glow) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .member-bio { font-size:1.05rem; line-height:1.85; color:#c0b0d0; margin-bottom:2rem; }
+    .member-socials { display:flex; gap:1rem; flex-wrap:wrap; }
+    .member-social-link { display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:.1em; color:var(--purple-glow); border:1px solid rgba(123,47,255,.35); padding:.45rem 1rem; transition:all .25s; }
+    .member-social-link:hover { background:var(--purple); color:#fff; border-color:var(--purple); }
+    .member-gear { margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(123,47,255,.15); }
+    .member-gear h4 { font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:.2em; color:var(--purple); text-transform:uppercase; margin-bottom:.8rem; }
+    .gear-tags { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .gear-tag { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--grey); background:rgba(123,47,255,.08); border:1px solid rgba(123,47,255,.15); padding:.25rem .6rem; }
+    @media(max-width:1024px) { .member-full,.member-full:nth-child(even){grid-template-columns:1fr;direction:ltr;} .member-photo-full img{min-height:400px;} .member-info{padding:3rem 2rem;} .member-number{font-size:5rem;} }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav id="navbar">
+  <a class="nav-logo" href="index.html"><img src="images/logo-cat.png" alt="Scratch Cat" /><span>Scratch Cat</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li><li><a href="band.html" class="active">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="container">
+    <p class="section-label">The People</p>
+    <h1>THE BAND</h1>
+  </div>
+  <div class="page-header-line"></div>
+</div>
+
+<div class="members-full">
+
+  <!-- STANLEY -->
+  <div class="member-full">
+    <div class="member-photo-full reveal"><img src="images/stanley-1.png" alt="Stanley Colson" loading="lazy" /></div>
+    <div class="member-info reveal">
+      <span class="member-number">01</span>
+      <span class="member-role-tag">Lead Vocals &middot; Lyrics &middot; Composition</span>
+      <h2 class="member-name-big">Stanley<br>Colson</h2>
+      <p class="member-bio">Stanley is the voice, the pen, and the beating heart of Scratch Cat. As the band's primary lyricist and composer, he shapes the emotional core of every track — crafting words that hit like a fist and linger like a bruise. On stage, his raw energy and magnetic presence command every room the band plays.</p>
+      <p class="member-bio">Founded the band in 2024 with a clear vision: loud, honest, guitar-driven music with something to say.</p>
+      <div class="member-socials">
+        <a class="member-social-link" href="https://www.instagram.com/stan.c7/" target="_blank" rel="noopener">&#128247; @stan.c7</a>
+      </div>
+      <div class="member-gear">
+        <h4>Role</h4>
+        <div class="gear-tags"><span class="gear-tag">Lead Vocals</span><span class="gear-tag">Lyrics</span><span class="gear-tag">Composition</span><span class="gear-tag">Studio Personnel</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FABIO -->
+  <div class="member-full">
+    <div class="member-photo-full reveal"><img src="images/fabio-1.png" alt="Fabio Ingrey" loading="lazy" /></div>
+    <div class="member-info reveal">
+      <span class="member-number">02</span>
+      <span class="member-role-tag">Guitar</span>
+      <h2 class="member-name-big">Fabio<br>Ingrey</h2>
+      <p class="member-bio">Fabio is the sonic architect of Scratch Cat's sound, wielding his guitar with a mix of precision and ferocity that cuts through any crowd. His riff vocabulary pulls from the full spectrum of alt-rock — post-punk angles, indie jangle, and full-throttle noise — stitching it all into something unmistakably his own.</p>
+      <p class="member-bio">Whether shredding centrestage or locked in a groove with the rhythm section, Fabio's playing is the backbone everything else hangs off.</p>
+      <div class="member-socials">
+        <a class="member-social-link" href="https://www.instagram.com/fabio.ingrey.music/" target="_blank" rel="noopener">&#128247; @fabio.ingrey.music</a>
+      </div>
+      <div class="member-gear">
+        <h4>Role</h4>
+        <div class="gear-tags"><span class="gear-tag">Lead Guitar</span><span class="gear-tag">Rhythm Guitar</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARNABY -->
+  <div class="member-full">
+    <div class="member-photo-full reveal"><img src="images/barnaby-1.png" alt="Barnaby Desoer" loading="lazy" /></div>
+    <div class="member-info reveal">
+      <span class="member-number">03</span>
+      <span class="member-role-tag">Drums</span>
+      <h2 class="member-name-big">Barnaby<br>Desoer</h2>
+      <p class="member-bio">Barnaby is the engine room — the driving force that locks the band in and propels every song forward. His drumming is simultaneously tight and explosive, holding down the groove while leaving room for the chaos that makes Scratch Cat's live shows so visceral.</p>
+      <p class="member-bio">On stage, Barnaby attacks his kit with an intensity that makes itself felt from the first bar to the last note.</p>
+      <div class="member-socials">
+        <a class="member-social-link" href="https://www.instagram.com/allhopeforbarny._/" target="_blank" rel="noopener">&#128247; @allhopeforbarny._</a>
+      </div>
+      <div class="member-gear">
+        <h4>Role</h4>
+        <div class="gear-tags"><span class="gear-tag">Drums</span><span class="gear-tag">Percussion</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISABELLA -->
+  <div class="member-full">
+    <div class="member-photo-full reveal"><img src="images/isabella-1.png" alt="Isabella Mendoza" loading="lazy" /></div>
+    <div class="member-info reveal">
+      <span class="member-number">04</span>
+      <span class="member-role-tag">Bass</span>
+      <h2 class="member-name-big">Isabella<br>Mendoza</h2>
+      <p class="member-bio">Isabella is the low-end anchor of Scratch Cat, laying down bass lines that are simultaneously melodic and monstrous. Her playing brings a groove and fluidity that elevates everything above it, and her stage presence adds a cool, assured energy that balances the band's wilder moments.</p>
+      <p class="member-bio">The kind of bassist who makes you feel the music in your chest before you consciously hear it.</p>
+      <div class="member-socials">
+        <a class="member-social-link" href="https://www.instagram.com/_lemonch/" target="_blank" rel="noopener">&#128247; @_lemonch</a>
+      </div>
+      <div class="member-gear">
+        <h4>Role</h4>
+        <div class="gear-tags"><span class="gear-tag">Bass Guitar</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="images/logo-cat.png" alt="Scratch Cat" /><p>Alt rock from North London. Loud, raw, and relentless since 2024.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Socials</h4><ul><li><a href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">Spotify</a></li><li><a href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://www.youtube.com/@standx23" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal"><p><strong>&copy; 2024&ndash;2025 Scratch Cat.</strong> All rights reserved. All content is the intellectual property of Scratch Cat and their respective creators. Website created exclusively for Scratch Cat for promotional purposes. Built by <strong>Truwty</strong>.</p></div>
+      <div class="footer-made"><p>Built by <a href="#">Truwty</a></p></div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scratch Cat – Alt Rock | North London</title>
+  <meta name="description" content="Scratch Cat – Alt rock band from North London. Founded 2024." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* HOME-SPECIFIC */
+    #hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:0; opacity:.18; filter:blur(2px); }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; }
+    .hero-gradient { position:absolute; inset:0; background: radial-gradient(ellipse 70% 60% at 50% 50%,rgba(123,47,255,.35) 0%,transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%,rgba(6,4,8,1) 0%,transparent 60%), linear-gradient(180deg,rgba(6,4,8,.7) 0%,rgba(6,4,8,.2) 40%,rgba(6,4,8,.8) 100%); }
+    .hero-content { position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+    .hero-cat { width:130px; filter:drop-shadow(0 0 30px rgba(200,0,255,.6)) drop-shadow(0 0 80px rgba(123,47,255,.4)); animation:catFloat 4s ease-in-out infinite; }
+    @keyframes catFloat { 0%,100%{transform:translateY(0) rotate(-1deg);} 50%{transform:translateY(-14px) rotate(1deg);} }
+    .hero-logo-text { width:min(600px,90vw); filter:drop-shadow(0 0 20px rgba(200,0,255,.5)); }
+    .hero-tagline { font-family:'Space Mono',monospace; font-size:.85rem; letter-spacing:.3em; color:var(--purple-glow); text-transform:uppercase; opacity:0; animation:fadeUp .8s .4s forwards; }
+    .hero-cta-row { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; opacity:0; animation:fadeUp .8s .7s forwards; }
+    .hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; color:var(--grey); font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.2em; animation:pulse 2s infinite; }
+    .hero-scroll span { display:block; width:1px; height:40px; background:linear-gradient(180deg,var(--purple),transparent); }
+    @keyframes pulse { 0%,100%{opacity:.4;} 50%{opacity:1;} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:none;} }
+
+    /* LATEST TRACK STRIP */
+    .track-strip { background:rgba(123,47,255,.08); border-top:1px solid rgba(123,47,255,.2); border-bottom:1px solid rgba(123,47,255,.2); padding:2rem 0; }
+    .track-strip-inner { display:flex; align-items:center; gap:3rem; overflow:hidden; }
+    .track-strip-label { font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:.25em; color:var(--purple); white-space:nowrap; text-transform:uppercase; }
+    .track-scroll-items { display:flex; gap:3rem; animation:scrollTrack 18s linear infinite; }
+    .track-item { display:flex; align-items:center; gap:.8rem; white-space:nowrap; font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.08em; color:var(--grey); text-decoration:none; transition:color .2s; }
+    .track-item:hover { color:var(--purple-glow); }
+    .track-item span { width:6px; height:6px; border-radius:50%; background:var(--purple); display:block; }
+    @keyframes scrollTrack { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+    /* ABOUT STRIP */
+    #home-about { background:var(--deep); }
+    .home-about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .home-img-stack { position:relative; height:520px; }
+    .img-main { position:absolute; top:0; left:0; width:72%; aspect-ratio:3/4; object-fit:cover; border:2px solid rgba(123,47,255,.3); box-shadow:0 0 50px rgba(123,47,255,.2); }
+    .img-accent { position:absolute; bottom:0; right:0; width:52%; aspect-ratio:1/1; object-fit:contain; background:var(--black); border:2px solid rgba(200,0,255,.25); box-shadow:0 0 30px rgba(200,0,255,.15); padding:1.2rem; }
+    .about-text p { font-size:1.1rem; line-height:1.85; color:#c0b0d0; margin-bottom:1.4rem; }
+    .about-badge { display:inline-block; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.15em; color:var(--purple-glow); border:1px solid var(--purple-dark); padding:.3rem .8rem; margin-bottom:1.8rem; }
+
+    /* HOME MEMBERS TEASER */
+    #home-members { background:var(--black); }
+    .members-teaser { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:3rem; background:rgba(123,47,255,.1); }
+    .member-teaser-card { background:var(--black); position:relative; overflow:hidden; }
+    .member-teaser-card:hover .mtp-img { transform:scale(1.06); filter:grayscale(0%) brightness(.7); }
+    .mtp-img { width:100%; aspect-ratio:.8/1; object-fit:cover; filter:grayscale(40%); transition:transform .5s, filter .5s; }
+    .mtp-overlay { position:absolute; bottom:0; left:0; right:0; padding:1.2rem; background:linear-gradient(0deg,rgba(6,4,8,.95) 0%,transparent 100%); }
+    .mtp-role { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.2em; color:var(--purple); text-transform:uppercase; }
+    .mtp-name { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.05em; line-height:1.1; }
+
+    /* HOME RELEASES */
+    #home-releases { background:var(--deep); }
+    .releases-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .release-card { border:1px solid rgba(123,47,255,.18); padding:2rem; position:relative; overflow:hidden; transition:all .3s; background:rgba(61,15,122,.04); }
+    .release-card::before { content:''; position:absolute; top:-1px; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--purple),transparent); transform:scaleX(0); transition:transform .4s; }
+    .release-card:hover { border-color:rgba(123,47,255,.5); transform:translateY(-5px); }
+    .release-card:hover::before { transform:scaleX(1); }
+    .rel-num { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:rgba(123,47,255,.12); line-height:1; }
+    .rel-title { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; letter-spacing:.04em; margin:.3rem 0 .4rem; }
+    .rel-type { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.2em; color:var(--grey); text-transform:uppercase; margin-bottom:1.4rem; }
+    .rel-link { display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--purple-glow); border:1px solid rgba(123,47,255,.35); padding:.45rem .9rem; transition:all .25s; }
+    .rel-link:hover { background:var(--purple); color:#fff; border-color:var(--purple); }
+
+    /* SHOWS TEASER */
+    #home-shows { background:var(--black); }
+    .show-item { display:grid; grid-template-columns:100px 1fr auto; align-items:center; gap:2rem; padding:1.4rem 0; border-bottom:1px solid rgba(123,47,255,.1); transition:padding-left .3s; }
+    .show-item:hover { padding-left:.6rem; }
+    .show-date-block { display:flex; flex-direction:column; align-items:flex-start; }
+    .show-day { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--purple); line-height:1; }
+    .show-mon { font-family:'Space Mono',monospace; font-size:.7rem; letter-spacing:.1em; color:var(--purple-glow); }
+    .show-year { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--grey); }
+    .show-venue-name { font-size:1.1rem; font-weight:700; }
+    .show-city { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--grey); margin-top:.2rem; }
+    .show-ticket-btn { font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:.1em; border:1px solid var(--purple); color:var(--purple-glow); text-decoration:none; padding:.4rem .9rem; transition:all .2s; white-space:nowrap; }
+    .show-ticket-btn:hover { background:var(--purple); color:#fff; }
+    .show-free { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--grey); border:1px solid rgba(123,47,255,.15); padding:.4rem .9rem; }
+    .no-shows { font-family:'Space Mono',monospace; font-size:.78rem; color:var(--grey); padding:2rem 0; }
+    .past-show { display:grid; grid-template-columns:100px 1fr auto; align-items:center; gap:2rem; padding:1.4rem 0; border-bottom:1px solid rgba(123,47,255,.08); opacity:.5; }
+
+    /* CONNECT */
+    #home-connect { background:var(--deep); }
+    .socials-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(123,47,255,.12); margin-top:3rem; }
+    .social-block { background:var(--deep); padding:2.5rem 2rem; text-decoration:none; color:var(--white); transition:background .3s; display:flex; flex-direction:column; align-items:flex-start; gap:.8rem; }
+    .social-block:hover { background:rgba(123,47,255,.1); }
+    .social-block-icon { font-size:2rem; }
+    .social-block-name { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.05em; }
+    .social-block-handle { font-family:'Space Mono',monospace; font-size:.62rem; color:var(--grey); }
+    .social-block-arrow { font-size:1.2rem; color:var(--purple); margin-top:auto; }
+
+    @media(max-width:1024px) { .home-about-grid{grid-template-columns:1fr;} .home-img-stack{height:350px;} .members-teaser{grid-template-columns:repeat(2,1fr);} .releases-row{grid-template-columns:1fr;} .socials-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:768px) { .releases-row{grid-template-columns:1fr;} .show-item,.past-show{grid-template-columns:80px 1fr;} .show-ticket-btn,.show-free{display:none;} }
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html"><img src="images/logo-cat.png" alt="Scratch Cat" /><span>Scratch Cat</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="band.html">Band</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="shows.html">Shows</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:.8rem;align-items:center;">
+    <button class="nav-admin-btn" onclick="openAdminLogin()">&#9881; Admin</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="images/band-3.png" alt="" /><img src="images/band-4.png" alt="" /><img src="images/band-2.png" alt="" />
+    <img src="images/band-7.png" alt="" /><img src="images/band-8.png" alt="" /><img src="images/band-1.png" alt="" />
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <img class="hero-cat" src="images/logo-cat.png" alt="Scratch Cat Logo" />
+    <img class="hero-logo-text" src="images/logo-text.png" alt="Scratch Cat" />
+    <p class="hero-tagline">Alt Rock &middot; North London &middot; Est. 2024</p>
+    <div class="hero-cta-row">
+      <a class="btn btn-primary" href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Listen on Spotify
+      </a>
+      <a class="btn btn-outline" href="music.html">View Releases</a>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL<span></span></div>
+</section>
+
+<!-- SCROLLING TRACK STRIP -->
+<div class="track-strip">
+  <div class="track-strip-inner container">
+    <span class="track-strip-label">Latest Tracks</span>
+    <div class="track-scroll-items" id="trackScrollItems">
+      <a class="track-item" href="https://open.spotify.com/track/0PJ6B8GrizqPLl76wGNDnk" target="_blank" rel="noopener"><span></span> Ghosts (That Can&apos;t Die)</a>
+      <a class="track-item" href="https://open.spotify.com/track/44UTYOBfDHi0gPGrruz5Yu" target="_blank" rel="noopener"><span></span> Jaded</a>
+      <a class="track-item" href="https://open.spotify.com/track/61TvxmlBn7Xaog17FldiK0" target="_blank" rel="noopener"><span></span> Fall and Break</a>
+      <a class="track-item" href="https://open.spotify.com/track/0PJ6B8GrizqPLl76wGNDnk" target="_blank" rel="noopener"><span></span> Ghosts (That Can&apos;t Die)</a>
+      <a class="track-item" href="https://open.spotify.com/track/44UTYOBfDHi0gPGrruz5Yu" target="_blank" rel="noopener"><span></span> Jaded</a>
+      <a class="track-item" href="https://open.spotify.com/track/61TvxmlBn7Xaog17FldiK0" target="_blank" rel="noopener"><span></span> Fall and Break</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="home-about">
+  <div class="container">
+    <div class="home-about-grid">
+      <div class="home-img-stack reveal">
+        <img class="img-main" src="images/band-4.png" alt="Band live" loading="lazy" />
+        <img class="img-accent" src="images/logo-cat.png" alt="Logo" loading="lazy" />
+      </div>
+      <div class="about-text reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-title">SCRATCH<br>CAT</h2>
+        <span class="about-badge">North London &middot; Founded 2024</span>
+        <p>Scratch Cat are a four-piece alt-rock band from North London, tearing up stages and turning heads since their formation in 2024.</p>
+        <p>Fusing angular guitars, thunderous drums, pulsing bass and raw, urgent vocals — they carve out a sound that is both distinctly modern and deeply rooted in the best traditions of guitar music.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <a class="btn btn-primary" href="band.html">Meet the Band</a>
+          <a class="btn btn-outline" href="music.html">Our Music</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERS TEASER -->
+<section id="home-members">
+  <div class="container">
+    <p class="section-label reveal">The Band</p>
+    <h2 class="section-title reveal">FOUR PEOPLE.<br>ONE SOUND.</h2>
+  </div>
+  <div class="container" style="padding-top:2rem;">
+    <div class="members-teaser reveal">
+      <div class="member-teaser-card">
+        <img class="mtp-img" src="images/stanley-1.png" alt="Stanley" loading="lazy" />
+        <div class="mtp-overlay"><p class="mtp-role">Vocals</p><p class="mtp-name">Stanley Colson</p></div>
+      </div>
+      <div class="member-teaser-card">
+        <img class="mtp-img" src="images/fabio-1.png" alt="Fabio" loading="lazy" />
+        <div class="mtp-overlay"><p class="mtp-role">Guitar</p><p class="mtp-name">Fabio Ingrey</p></div>
+      </div>
+      <div class="member-teaser-card">
+        <img class="mtp-img" src="images/barnaby-1.png" alt="Barnaby" loading="lazy" />
+        <div class="mtp-overlay"><p class="mtp-role">Drums</p><p class="mtp-name">Barnaby Desoer</p></div>
+      </div>
+      <div class="member-teaser-card">
+        <img class="mtp-img" src="images/isabella-1.png" alt="Isabella" loading="lazy" />
+        <div class="mtp-overlay"><p class="mtp-role">Bass</p><p class="mtp-name">Isabella Mendoza</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;"><a class="btn btn-outline" href="band.html">Full Band Profiles &#8599;</a></div>
+  </div>
+</section>
+
+<!-- RELEASES TEASER -->
+<section id="home-releases">
+  <div class="container">
+    <p class="section-label reveal">Discography</p>
+    <h2 class="section-title reveal">LATEST<br>RELEASES</h2>
+    <div class="releases-row">
+      <div class="release-card reveal">
+        <div class="rel-num">01</div>
+        <div class="rel-title">Ghosts (That Can&apos;t Die)</div>
+        <div class="rel-type">Single &middot; 2024</div>
+        <a class="rel-link" href="https://open.spotify.com/track/0PJ6B8GrizqPLl76wGNDnk" target="_blank" rel="noopener">&#9654; Play on Spotify</a>
+      </div>
+      <div class="release-card reveal">
+        <div class="rel-num">02</div>
+        <div class="rel-title">Jaded</div>
+        <div class="rel-type">Single &middot; 2024</div>
+        <a class="rel-link" href="https://open.spotify.com/track/44UTYOBfDHi0gPGrruz5Yu" target="_blank" rel="noopener">&#9654; Play on Spotify</a>
+      </div>
+      <div class="release-card reveal">
+        <div class="rel-num">03</div>
+        <div class="rel-title">Fall and Break</div>
+        <div class="rel-type">Single &middot; 2024</div>
+        <a class="rel-link" href="https://open.spotify.com/track/61TvxmlBn7Xaog17FldiK0" target="_blank" rel="noopener">&#9654; Play on Spotify</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a class="btn btn-outline" href="music.html">All Releases &#8599;</a></div>
+  </div>
+</section>
+
+<!-- SHOWS TEASER -->
+<section id="home-shows">
+  <div class="container">
+    <p class="section-label reveal">Live</p>
+    <h2 class="section-title reveal">SHOWS</h2>
+    <div class="past-show reveal">
+      <div class="show-date-block"><span class="show-day">27</span><span class="show-mon">FEB</span><span class="show-year">2025 &middot; PAST</span></div>
+      <div class="show-info"><p class="show-venue-name">Jom Junior Open Mic</p><p class="show-city">London</p></div>
+      <a class="show-ticket-btn" href="https://www.instagram.com/p/DVRObzbCDsI/" target="_blank" rel="noopener">View Post</a>
+    </div>
+    <div id="dynamicShows"></div>
+    <p id="noShows" class="no-shows" style="display:none;">No upcoming shows yet &mdash; stay tuned.</p>
+    <div style="text-align:center;margin-top:2.5rem;"><a class="btn btn-outline" href="shows.html">All Shows &#8599;</a></div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="home-connect">
+  <div class="container">
+    <p class="section-label reveal">Socials</p>
+    <h2 class="section-title reveal">FOLLOW<br>THE CAT</h2>
+    <div class="socials-grid reveal">
+      <a class="social-block" href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">
+        <span class="social-block-icon">&#127925;</span>
+        <span class="social-block-name">Spotify</span>
+        <span class="social-block-handle">Scratch Cat</span>
+        <span class="social-block-arrow">&#8599;</span>
+      </a>
+      <a class="social-block" href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">
+        <span class="social-block-icon">&#128247;</span>
+        <span class="social-block-name">Instagram</span>
+        <span class="social-block-handle">@scratch.cat.band</span>
+        <span class="social-block-arrow">&#8599;</span>
+      </a>
+      <a class="social-block" href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">
+        <span class="social-block-icon">&#127916;</span>
+        <span class="social-block-name">TikTok</span>
+        <span class="social-block-handle">@scratch.cat.band</span>
+        <span class="social-block-arrow">&#8599;</span>
+      </a>
+      <a class="social-block" href="https://www.youtube.com/@standx23" target="_blank" rel="noopener">
+        <span class="social-block-icon">&#9654;</span>
+        <span class="social-block-name">YouTube</span>
+        <span class="social-block-handle">@standx23</span>
+        <span class="social-block-arrow">&#8599;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="adminLoginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAdminLogin()">&#215;</button>
+    <h2>ADMIN ACCESS</h2>
+    <p>Enter the admin password to manage shows and content.</p>
+    <div class="form-group"><label>Password</label><input type="password" id="adminPassword" onkeydown="if(event.key==='Enter')checkAdminPassword()" /></div>
+    <p class="form-error" id="adminError">Incorrect password.</p>
+    <button class="btn-admin" onclick="checkAdminPassword()">UNLOCK</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="container">
+    <p class="section-label">Admin</p>
+    <h2 class="section-title">ADMIN PANEL</h2>
+    <div class="admin-grid">
+      <div class="admin-section">
+        <h3>Add Show</h3>
+        <div class="form-group"><label>Date</label><input type="date" id="showDate" /></div>
+        <div class="form-group"><label>Venue</label><input type="text" id="showVenue" placeholder="Venue name" /></div>
+        <div class="form-group"><label>City</label><input type="text" id="showCity" placeholder="City" /></div>
+        <div class="form-group"><label>Link (optional)</label><input type="url" id="showLink" placeholder="https://..." /></div>
+        <button class="btn-admin" onclick="addShow()">+ ADD SHOW</button>
+        <h3 style="margin-top:2rem;">Current Shows</h3>
+        <ul class="admin-list" id="adminShowList"></ul>
+      </div>
+      <div class="admin-section">
+        <h3>Gallery Images</h3>
+        <div class="form-group"><label>Upload Images</label><input type="file" id="galleryUpload" accept="image/*" multiple style="color:var(--white);" /></div>
+        <button class="btn-admin" onclick="addGalleryImages()">+ ADD IMAGES</button>
+        <div class="admin-gallery-preview" id="adminGalleryList"></div>
+        <h3 style="margin-top:2rem;">Change Password</h3>
+        <div class="form-group"><label>New Password</label><input type="password" id="newPassword" /></div>
+        <div class="form-group"><label>Confirm</label><input type="password" id="confirmPassword" /></div>
+        <p class="form-error" id="pwError">Passwords don&apos;t match.</p>
+        <button class="btn-admin" onclick="changePassword()">UPDATE PASSWORD</button>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:2rem;">
+      <button class="btn-admin btn-danger" style="width:auto;" onclick="logoutAdmin()">LOGOUT</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo-cat.png" alt="Scratch Cat" />
+        <p>Alt rock from North London. Loud, raw, and relentless since 2024.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul><li><a href="index.html">Home</a></li><li><a href="band.html">Band</a></li><li><a href="music.html">Music</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="shows.html">Shows</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Socials</h4>
+        <ul><li><a href="https://open.spotify.com/artist/5sC3QbNn932EM4ci7MjC9P" target="_blank" rel="noopener">Spotify</a></li><li><a href="https://www.instagram.com/scratch.cat.band" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@scratch.cat.band" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://www.youtube.com/@standx23" target="_blank" rel="noopener">YouTube</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <p><strong>&copy; 2024&ndash;2025 Scratch Cat.</strong> All rights reserved. All music, lyrics, artwork and photography are the intellectual property of Scratch Cat and their respective creators. Unauthorised reproduction or commercial use of any content is strictly prohibited without prior written consent. This website was created exclusively for <strong>Scratch Cat</strong> for promotional purposes only. Spotify, Instagram, TikTok and YouTube are trademarks of their respective owners.</p>
+      </div>
+      <div class="footer-made"><p>Built by <a href="#">Truwty</a></p><p style="font-size:.5rem;color:var(--purple-dark);margin-top:.3rem;">v2.0 &middot; 2025</p></div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
